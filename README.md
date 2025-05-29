@@ -36,4 +36,5 @@ El objetivo es acercarse lo más posible a 21 puntos sin pasarse. El jugador pue
    ```
 
 ## Autor
-- [Cardenas Gaviria](https://github.com/ElLocologo)
+- [Raúl Fernando Cárdenas Gaviria](https://github.com/ElLocologo)
+- [Camilo José Camacho López](https://github.com/CamiloCamacho37)
