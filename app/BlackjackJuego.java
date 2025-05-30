@@ -2,9 +2,9 @@ package app;
 
 import dealer.ArbolDecisionDealer;
 import estructura.Baraja;
-import estructura.ColaTurnos;
-import estructura.HashJugador;
+import estructura.FilaTurnos;
 import estructura.PilaCartas;
+import estructura.TablaJugador;
 import java.util.Scanner;
 import model.Carta;
 import model.Jugador;
@@ -13,8 +13,8 @@ import model.Jugador;
 public class BlackjackJuego {
     private final Baraja baraja;
     private final PilaCartas historial;
-    private final ColaTurnos colaTurnos;
-    private final HashJugador hashJugadores;
+    private final FilaTurnos FilaTurnos;
+    private final TablaJugador TablaJugadores;
     private final ArbolDecisionDealer arbolDealer;
     private Jugador dealer;
     private Jugador jugadorHumano;
@@ -23,8 +23,8 @@ public class BlackjackJuego {
     public BlackjackJuego() {
         baraja = new Baraja();
         historial = new PilaCartas();
-        colaTurnos = new ColaTurnos();
-        hashJugadores = new HashJugador(10);
+        FilaTurnos = new FilaTurnos();
+        TablaJugadores = new TablaJugador(10);
         arbolDealer = new ArbolDecisionDealer();
         scanner = new Scanner(System.in);
         inicializarBaraja();
@@ -65,18 +65,19 @@ public class BlackjackJuego {
         String nombre = scanner.nextLine();
         jugadorHumano = new Jugador(nombre);
         dealer = new Jugador("Dealer");
-        hashJugadores.agregarJugador(jugadorHumano);
-        hashJugadores.agregarJugador(dealer);
-        colaTurnos.encolar(jugadorHumano);
-        colaTurnos.encolar(dealer);
-        // Repartir dos cartas a cada uno
+        TablaJugadores.agregarJugador(jugadorHumano);
+        TablaJugadores.agregarJugador(dealer);
+        FilaTurnos.encolar(jugadorHumano);
+        FilaTurnos.encolar(dealer);
+        // Repartir dos cartas a cada jugaador
+
         for (int i = 0; i < 2; i++) {
             jugadorHumano.agregarCarta(baraja.robarCarta());
             dealer.agregarCarta(baraja.robarCarta());
         }
         // Turnos
         while (true) {
-            Jugador actual = colaTurnos.desencolar();
+            Jugador actual = FilaTurnos.desencolar();
             if (actual == null) break;
             if (actual == jugadorHumano) {
                 turnoJugador(jugadorHumano);
@@ -84,7 +85,7 @@ public class BlackjackJuego {
                 turnoDealer(dealer);
             }
             if (!jugadorHumano.estado.equals("jugando") && !dealer.estado.equals("jugando")) break;
-            colaTurnos.encolar(actual);
+            FilaTurnos.encolar(actual);
         }
         mostrarResultados();
     }

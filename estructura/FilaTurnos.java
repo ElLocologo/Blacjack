@@ -3,11 +3,11 @@ import model.Jugador;
 import model.NodoJugador;
 
 // Implementación propia de cola para turnos
-public class ColaTurnos {
+public class FilaTurnos {
     private NodoJugador frente;
     private NodoJugador fin;
 
-    public ColaTurnos() {
+    public FilaTurnos() {
         frente = null;
         fin = null;
     }

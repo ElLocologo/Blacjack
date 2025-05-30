@@ -2,11 +2,11 @@ package estructura;
 import model.Jugador;
 
 // Tabla hash propia para jugadores
-public class HashJugador {
+public class TablaJugador {
     private final Jugador[] tabla;
     private final int capacidad;
 
-    public HashJugador(int capacidad) {
+    public TablaJugador(int capacidad) {
         this.capacidad = capacidad;
         tabla = new Jugador[capacidad];
     }
